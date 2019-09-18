@@ -18,3 +18,9 @@ form {
 .submit-btn {
   float: right;
 }
+
+footer {
+  height: 50px;
+  margin-top: 5%;
+  border-radius: 8px;
+}

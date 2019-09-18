@@ -22,6 +22,7 @@ var startDate;
 
 var payRate;
 
+
 $('.submit-btn').on('click', function(event){
   
   event.preventDefault();
@@ -37,11 +38,12 @@ $('.submit-btn').on('click', function(event){
     name: name,
     role: role,
     startDate: startDate,
-    payRate: payRate
+    payRate: payRate,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
   })
 })
 
-database.ref().on('child_added', function(snapshot){
+database.ref().orderByChild('dateAdded').on('child_added', function(snapshot){
 
   var sv = snapshot.val();
 
@@ -52,9 +54,24 @@ database.ref().on('child_added', function(snapshot){
 
   var arrayInfo = [];
 
+  //split the start date string into separate parts
+  var dateArray = sv.startDate.split('-');
+  console.log(dateArray);
 
+  var startYear = dateArray[0];
+  var startMonth = dateArray[1];
 
-  arrayInfo.push(sv.name, sv.role, sv.startDate, sv.payRate)
+  var currentDate = new Date;
+
+  var currentYear = currentDate.getFullYear();
+  var currentMonth = currentDate.getMonth();
+
+  var monthsWorked = (((currentYear - startYear)*12) + (currentMonth - startMonth)) - 1;
+
+  var totalPay = monthsWorked * sv.payRate;
+  console.log(monthsWorked);
+
+  arrayInfo.push(sv.name, sv.role, sv.startDate, monthsWorked, sv.payRate, totalPay)
 
   var newRow = $('<tr>');
 
