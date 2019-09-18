@@ -14,3 +14,54 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+var name;
+
+var role;
+
+var startDate;
+
+var payRate;
+
+$('.submit-btn').on('click', function(event){
+  
+  event.preventDefault();
+
+  name = $('#employeeName').val();
+  role = $('#employeeRole').val();
+  startDate = $('#employeeStart').val();
+  payRate = $('#employeeRate').val();
+
+  console.log(name, role, startDate, payRate);
+
+  database.ref().push({
+    name: name,
+    role: role,
+    startDate: startDate,
+    payRate: payRate
+  })
+})
+
+database.ref().on('child_added', function(snapshot){
+
+  var sv = snapshot.val();
+
+  console.log(sv.name);
+  console.log(sv.role);
+  console.log(sv.startDate);
+  console.log(sv.payRate);
+
+  var arrayInfo = [];
+
+
+
+  arrayInfo.push(sv.name, sv.role, sv.startDate, sv.payRate)
+
+  var newRow = $('<tr>');
+
+  arrayInfo.forEach(function(info){
+    newRow.append('<td>' + info + '</td>')
+  })
+
+  $('#table').append(newRow);
+  
+})
