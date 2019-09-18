@@ -16,6 +16,9 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.js"
     integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/styles/style.css" type="text/css">
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
+
 </head>
 <body>
   <div class="jumbotron text-center bg-dark text-light">
@@ -45,5 +48,27 @@
       </tr>
     </tbody>
   </table>
+  <form>
+    <div class="form-group">
+      <label for="employeeName">Employee Name</label>
+      <input type="text" class="form-control" id="employeeName" placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+      <label for="employeeRole">Employee Role</label>
+      <input type="text" class="form-control" id="employeeRole" placeholder="Enter Role">
+    </div>
+    <div class="form-group">
+      <label for="employeeStart">Employee Start Date</label>
+      <input type="date" class="form-control" id="employeeStart" placeholder="Enter Start Date">
+    </div>
+    <div class="form-group">
+      <label for="employeeRate">Employee Pay Rate</label>
+      <input type="text" class="form-control" id="employeeRate" placeholder="Enter Rate">
+    </div>
+    <button type="submit" class="submit-btn btn-primary btn">Submit Information</button>
+  </form>
+
+<script src="assets/javascript/timesheet.js" type="text/javascript"></script>
 </body>
+
 </html>
